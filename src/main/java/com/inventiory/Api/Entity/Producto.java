@@ -1,6 +1,7 @@
 
 package com.inventiory.Api.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -8,6 +9,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.DecimalMin;
@@ -63,16 +66,13 @@ public class Producto {
     private String marca;
     
     @NotNull(message = "La categoría es obligatoria")
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 50)
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", nullable = false) // Clave foránea
     private Categoria categoria;
 
-    // Enumeración para categorías
-    public enum Categoria {
-        ELECTRONICA,
-        HOGAR,
-        ROPA,
-        ALIMENTOS,
-        OTROS
-    }
+  
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false) // Clave foránea
+    @JsonIgnore
+    private User usuario;
 }

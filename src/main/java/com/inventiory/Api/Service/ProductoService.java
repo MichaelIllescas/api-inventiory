@@ -39,8 +39,8 @@ public class ProductoService {
 
 
   
-    public List<Producto> obtenerTodosLosProductos() {
-        return productoRepository.findAll();
+    public List<Producto> obtenerTodosLosProductosPorUsuario(Long idUsuario) {
+        return productoRepository.findByUsuarioId(idUsuario);
     }
 
 }
